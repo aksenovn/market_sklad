@@ -1,16 +1,103 @@
-<h1>МаркетСклад</h1>
-<p>Интернет-магазин с управлением складом.</p>
+<% content_for :title, "МаркетСклад — магазин и управление складом" %>
 
-<h2>Покупателям</h2>
-<p>Выбирайте товары в каталоге, оформляйте заказы и следите за их статусом.</p>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-content">
+    <span class="eyebrow">МАГАЗИН · ЗАКАЗЫ · СКЛАД</span>
 
-<h2>Сотрудникам</h2>
-<p>Управляйте товарами, принимайте поставки и контролируйте остатки на складах.</p>
+    <h1 id="hero-title">
+      От выбора товара<br>
+      до готового заказа
+    </h1>
 
-<h2>В разработке</h2>
-<ul>
-  <li>Каталог товаров с поиском и фильтрами</li>
-  <li>Корзина и оформление заказов</li>
-  <li>Личный кабинет покупателя</li>
-  <li>Учёт поставок и складских остатков</li>
-</ul>
+    <p class="hero-description">
+      МаркетСклад объединяет покупки и управление запасами.
+      Покупателям — удобный выбор, сотрудникам — порядок на складе.
+    </p>
+
+    <div class="hero-actions">
+      <a class="button button-primary" href="#features">
+        Узнать о возможностях <span aria-hidden="true">→</span>
+      </a>
+      <span class="status-label">
+        <span class="status-dot" aria-hidden="true"></span>
+        Проект в разработке
+      </span>
+    </div>
+  </div>
+
+  <aside class="process-card" aria-label="Как будет работать сервис">
+    <p class="card-caption">ПРОСТОЙ ПУТЬ ЗАКАЗА</p>
+
+    <ol class="process-list">
+      <li>
+        <span class="step-number" aria-hidden="true">01</span>
+        <div>
+          <h2>Выбор товара</h2>
+          <p>Каталог, описание и доступное количество.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number" aria-hidden="true">02</span>
+        <div>
+          <h2>Оформление заказа</h2>
+          <p>Корзина и данные для доставки.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number" aria-hidden="true">03</span>
+        <div>
+          <h2>Сборка и отправка</h2>
+          <p>Обработка сотрудником и обновление статуса.</p>
+        </div>
+      </li>
+    </ol>
+  </aside>
+</section>
+
+<section id="features" class="page-section" aria-labelledby="features-title">
+  <div class="section-heading">
+    <span class="eyebrow">ВОЗМОЖНОСТИ</span>
+    <h2 id="features-title">Два сценария. Один сервис.</h2>
+    <p>Эти возможности появятся на следующих этапах разработки.</p>
+  </div>
+
+  <div class="feature-grid">
+    <article class="feature-card">
+      <span class="card-label">ПОКУПАТЕЛЯМ</span>
+      <h3>Покупки без лишних шагов</h3>
+      <p>Всё необходимое для выбора товара и оформления заказа.</p>
+
+      <ul class="feature-list">
+        <li>Каталог с поиском и фильтрами</li>
+        <li>Корзина и оформление заказа</li>
+        <li>История покупок и статусы</li>
+        <li>Отзывы о полученных товарах</li>
+      </ul>
+    </article>
+
+    <article class="feature-card">
+      <span class="card-label">СОТРУДНИКАМ</span>
+      <h3>Запасы под контролем</h3>
+      <p>Работа с товарами и поставками в одном приложении.</p>
+
+      <ul class="feature-list">
+        <li>Управление каталогом товаров</li>
+        <li>Учёт остатков на складах</li>
+        <li>Приёмка поставок от поставщиков</li>
+        <li>Сборка и обработка заказов</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section id="about" class="about-panel" aria-labelledby="about-title">
+  <div>
+    <span class="eyebrow">О ПРОЕКТЕ</span>
+    <h2 id="about-title">Развиваем сервис шаг за шагом</h2>
+    <p>
+      Сейчас доступна главная страница. Далее добавим каталог,
+      личный кабинет, заказы и инструменты управления складом.
+    </p>
+  </div>
+  <span class="about-badge">Учебный проект</span>
+</section>

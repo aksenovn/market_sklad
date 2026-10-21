@@ -1,29 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
-    <title><%= content_for(:title) || "Market Sklad" %></title>
+    <title><%= content_for(:title) || "МаркетСклад" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Market Sklad">
+    <meta name="application-name" content="МаркетСклад">
     <meta name="mobile-web-app-capable" content="yes">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <%= link_to root_path, class: "brand", aria: { label: "МаркетСклад — главная" } do %>
+          <span class="brand-mark" aria-hidden="true">М</span>
+          <span>МаркетСклад</span>
+        <% end %>
+
+        <nav class="site-nav" aria-label="Основная навигация">
+          <%= link_to "Главная", root_path,
+              class: "nav-link",
+              aria: { current: current_page?(root_path) ? "page" : nil } %>
+          <%= link_to "Возможности", root_path(anchor: "features"), class: "nav-link" %>
+          <%= link_to "О проекте", root_path(anchor: "about"), class: "nav-link" %>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main" tabindex="-1">
+      <div class="container">
+        <% flash.each do |type, message| %>
+          <div class="flash <%= type == "alert" ? "flash-alert" : "flash-notice" %>"
+               role="<%= type == "alert" ? "alert" : "status" %>">
+            <%= message %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span class="footer-brand">МаркетСклад</span>
+        <span>Магазин и склад в одном месте</span>
+        <span>© <%= Date.current.year %></span>
+      </div>
+    </footer>
   </body>
 </html>
