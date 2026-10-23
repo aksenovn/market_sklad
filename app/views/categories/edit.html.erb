@@ -1,0 +1,9 @@
+<% content_for :title, "Редактирование категории — МаркетСклад" %>
+
+<%= link_to "← К категории", category_path(@category), class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Редактирование категории</h1>
+
+  <%= render "form", category: @category %>
+</section>

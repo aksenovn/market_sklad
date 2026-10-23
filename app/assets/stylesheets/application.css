@@ -438,3 +438,165 @@ h1 {
     scroll-behavior: auto;
   }
 }
+.page-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.page-title {
+  margin-block: 12px 16px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.page-description {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.category-title {
+  margin-bottom: 12px;
+  font-size: 23px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.category-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.category-title a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.text-link {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.content-panel {
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.form-panel {
+  max-width: 760px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.category-description {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.category-form {
+  margin-top: 28px;
+}
+
+.form-field + .form-field {
+  margin-top: 24px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #aabbb1;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.field_with_errors {
+  display: contents;
+}
+
+.field_with_errors input,
+.field_with_errors textarea {
+  border-color: #a83220;
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.page-actions form {
+  margin: 0;
+}
+
+.button {
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.button-secondary {
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.button-secondary:hover {
+  background: var(--background);
+}
+
+.button-danger {
+  border-color: #e9b4a9;
+  background: #fff0ed;
+  color: #8a2517;
+}
+
+.button-danger:hover {
+  background: #ffe0da;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #bd6500;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .content-panel {
+    padding: 24px;
+  }
+}

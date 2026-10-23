@@ -1,0 +1,33 @@
+<% content_for :title, "Категории — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">КАТАЛОГ</span>
+    <h1 class="page-title">Категории товаров</h1>
+    <p class="page-description">Разделы для удобного поиска товаров.</p>
+  </div>
+
+  <%= link_to "Добавить категорию", new_category_path,
+      class: "button button-primary" %>
+</div>
+
+<% if @categories.any? %>
+  <div class="feature-grid">
+    <% @categories.each do |category| %>
+      <article class="feature-card">
+        <h2 class="category-title">
+          <%= link_to category.name, category %>
+        </h2>
+
+        <p><%= category.description.presence || "Описание пока не добавлено." %></p>
+
+        <%= link_to "Подробнее →", category, class: "text-link" %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Категорий пока нет</h2>
+    <p>Добавьте первую категорию, чтобы начать работу с каталогом.</p>
+  </div>
+<% end %>

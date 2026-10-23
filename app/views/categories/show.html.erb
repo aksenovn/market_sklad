@@ -1,0 +1,26 @@
+<% content_for :title, "#{@category.name} — МаркетСклад" %>
+
+<%= link_to "← Все категории", categories_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow">КАТЕГОРИЯ ТОВАРОВ</span>
+  <h1 class="page-title"><%= @category.name %></h1>
+
+  <div class="category-description">
+    <%= simple_format(@category.description.presence || "Описание пока не добавлено.") %>
+  </div>
+
+  <div class="page-actions">
+    <%= link_to "Редактировать", edit_category_path(@category),
+        class: "button button-primary" %>
+
+    <%= button_to "Удалить категорию", @category,
+        method: :delete,
+        class: "button button-danger",
+        form: {
+          data: {
+            turbo_confirm: "Удалить категорию «#{@category.name}»?"
+          }
+        } %>
+  </div>
+</article>

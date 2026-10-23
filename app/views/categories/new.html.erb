@@ -1,0 +1,12 @@
+<% content_for :title, "Новая категория — МаркетСклад" %>
+
+<%= link_to "← Все категории", categories_path, class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Новая категория</h1>
+  <p class="page-description">
+    Укажите название и, при необходимости, описание.
+  </p>
+
+  <%= render "form", category: @category %>
+</section>
