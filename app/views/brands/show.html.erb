@@ -1,0 +1,22 @@
+<% content_for :title, "#{@brand.name} — МаркетСклад" %>
+
+<%= link_to "← Все бренды", brands_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow">БРЕНД ТОВАРОВ</span>
+  <h1 class="page-title"><%= @brand.name %></h1>
+
+  <div class="page-actions">
+    <%= link_to "Редактировать", edit_brand_path(@brand),
+        class: "button button-primary" %>
+
+    <%= button_to "Удалить бренд", @brand,
+        method: :delete,
+        class: "button button-danger",
+        form: {
+          data: {
+            turbo_confirm: "Удалить бренд «#{@brand.name}»?"
+          }
+        } %>
+  </div>
+</article>

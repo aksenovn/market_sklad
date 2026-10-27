@@ -36,6 +36,9 @@
           <%= link_to "Категории", categories_path,
               class: "nav-link",
               aria: { current: controller_name == "categories" ? "page" : nil } %>
+          <%= link_to "Бренды", brands_path,
+    class: "nav-link",
+    aria: { current: controller_name == "brands" ? "page" : nil } %>
           <%= link_to "Возможности", root_path(anchor: "features"), class: "nav-link" %>
           <%= link_to "О проекте", root_path(anchor: "about"), class: "nav-link" %>
         </nav>

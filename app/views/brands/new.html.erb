@@ -1,0 +1,10 @@
+<% content_for :title, "Новый бренд — МаркетСклад" %>
+
+<%= link_to "← Все бренды", brands_path, class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Новый бренд</h1>
+  <p class="page-description">Укажите название производителя товаров.</p>
+
+  <%= render "form", brand: @brand %>
+</section>

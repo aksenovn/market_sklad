@@ -1,0 +1,31 @@
+<% content_for :title, "Бренды — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">КАТАЛОГ</span>
+    <h1 class="page-title">Бренды товаров</h1>
+    <p class="page-description">Производители товаров нашего магазина.</p>
+  </div>
+
+  <%= link_to "Добавить бренд", new_brand_path,
+      class: "button button-primary" %>
+</div>
+
+<% if @brands.any? %>
+  <div class="feature-grid">
+    <% @brands.each do |brand| %>
+      <article class="feature-card">
+        <h2 class="category-title">
+          <%= link_to brand.name, brand %>
+        </h2>
+
+        <%= link_to "Подробнее →", brand, class: "text-link" %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Брендов пока нет</h2>
+    <p>Добавьте первый бренд, чтобы использовать его при создании товаров.</p>
+  </div>
+<% end %>

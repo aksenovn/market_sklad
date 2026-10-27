@@ -1,0 +1,25 @@
+<%= form_with(model: brand, class: "category-form") do |form| %>
+  <% if brand.errors.any? %>
+    <div class="flash flash-alert" role="alert">
+      <strong>Проверьте заполнение формы:</strong>
+      <ul>
+        <% brand.errors.each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :name, "Название бренда (обязательно)" %>
+    <%= form.text_field :name,
+        maxlength: 100,
+        required: true,
+        placeholder: "Например, Samsung" %>
+  </div>
+
+  <div class="page-actions">
+    <%= form.submit "Сохранить бренд", class: "button button-primary" %>
+    <%= link_to "Отмена", brands_path, class: "button button-secondary" %>
+  </div>
+<% end %>

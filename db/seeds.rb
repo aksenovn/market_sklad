@@ -14,3 +14,17 @@ categories.each do |name, description|
   category.description = description
   category.save!
 end
+brand_names = [
+  "Samsung",
+  "Bosch",
+  "Lenovo",
+  "Xiaomi",
+  "Philips",
+  "Logitech",
+  "Nike",
+  "LEGO"
+]
+
+brand_names.each do |name|
+  Brand.find_or_create_by!(name: name)
+end
