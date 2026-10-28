@@ -1,0 +1,39 @@
+<% content_for :title, "#{@product.name} — МаркетСклад" %>
+
+<%= link_to "← Все товары", products_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow">ТОВАР</span>
+  <h1 class="page-title"><%= @product.name %></h1>
+
+  <dl class="product-details">
+    <dt>Артикул</dt>
+    <dd><%= @product.sku %></dd>
+
+    <dt>Категория</dt>
+    <dd><%= link_to @product.category.name, @product.category %></dd>
+
+    <dt>Бренд</dt>
+    <dd><%= link_to @product.brand.name, @product.brand %></dd>
+
+    <dt>Цена</dt>
+    <dd>
+      <%= number_to_currency @product.price,
+          unit: "₽", format: "%n %u",
+          delimiter: " ", separator: ",", precision: 2 %>
+    </dd>
+
+    <dt>Статус</dt>
+    <dd><%= @product.active? ? "Активен" : "В архиве" %></dd>
+  </dl>
+
+  <h2>Описание</h2>
+  <div class="category-description">
+    <%= simple_format(@product.description.presence || "Описание пока не добавлено.") %>
+  </div>
+
+  <div class="page-actions">
+    <%= link_to "Редактировать", edit_product_path(@product),
+        class: "button button-primary" %>
+  </div>
+</article>

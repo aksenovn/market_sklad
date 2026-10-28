@@ -1,0 +1,17 @@
+one:
+  name: Смартфон Samsung
+  sku: SAM-001
+  description: Тестовый смартфон
+  price: 25000.00
+  active: true
+  category: one
+  brand: one
+
+two:
+  name: Пылесос Bosch
+  sku: BOS-001
+  description: Тестовый пылесос
+  price: 15000.00
+  active: true
+  category: two
+  brand: two

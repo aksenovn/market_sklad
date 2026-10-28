@@ -46,15 +46,27 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy!
-
     respond_to do |format|
-      format.html do
-        redirect_to categories_path,
-                    notice: "Категория удалена.",
-                    status: :see_other
+      if @category.destroy
+        format.html do
+          redirect_to categories_path,
+                      notice: "Категория удалена.",
+                      status: :see_other
+        end
+        format.json { head :no_content }
+      else
+        message = "Нельзя удалить категорию, пока с ней связаны товары."
+
+        format.html do
+          redirect_to @category,
+                      alert: message,
+                      status: :see_other
+        end
+        format.json do
+          render json: { errors: [ message ] },
+                 status: :unprocessable_content
+        end
       end
-      format.json { head :no_content }
     end
   end
 

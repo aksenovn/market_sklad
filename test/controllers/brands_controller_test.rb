@@ -42,11 +42,24 @@ class BrandsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to brand_url(@brand)
   end
 
-  test "should destroy brand" do
+    test "should destroy unused brand" do
+    brand = Brand.create!(name: "Временный бренд")
+
     assert_difference("Brand.count", -1) do
-      delete brand_url(@brand)
+      delete brand_url(brand)
     end
 
     assert_redirected_to brands_url
+  end
+
+  test "should not destroy brand with products" do
+    assert_no_difference("Brand.count") do
+      delete brand_url(@brand)
+    end
+
+    assert_redirected_to brand_url(@brand)
+    assert_equal "Нельзя удалить бренд, пока с ним связаны товары.",
+                 flash[:alert]
+    assert Product.exists?(products(:one).id)
   end
 end

@@ -33,6 +33,9 @@
           <%= link_to "Главная", root_path,
               class: "nav-link",
               aria: { current: current_page?(root_path) ? "page" : nil } %>
+          <%= link_to "Товары", products_path,
+              class: "nav-link",
+              aria: { current: controller_name == "products" ? "page" : nil } %>
           <%= link_to "Категории", categories_path,
               class: "nav-link",
               aria: { current: controller_name == "categories" ? "page" : nil } %>

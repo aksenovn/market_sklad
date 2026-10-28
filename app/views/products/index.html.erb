@@ -1,0 +1,50 @@
+<% content_for :title, "Товары — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">КАТАЛОГ</span>
+    <h1 class="page-title">Товары</h1>
+    <p class="page-description">
+      Управление товарами, ценами, категориями и брендами.
+    </p>
+  </div>
+
+  <%= link_to "Добавить товар", new_product_path,
+      class: "button button-primary" %>
+</div>
+
+<% if @products.any? %>
+  <div class="feature-grid">
+    <% @products.each do |product| %>
+      <article class="feature-card">
+        <span class="card-label">
+          <%= product.active? ? "АКТИВЕН" : "В АРХИВЕ" %>
+        </span>
+
+        <h2 class="category-title">
+          <%= link_to product.name, product %>
+        </h2>
+
+        <p>
+          <%= product.category.name %> · <%= product.brand.name %><br>
+          Артикул: <%= product.sku %>
+        </p>
+
+        <p>
+          <strong>
+            <%= number_to_currency product.price,
+                unit: "₽", format: "%n %u",
+                delimiter: " ", separator: ",", precision: 2 %>
+          </strong>
+        </p>
+
+        <%= link_to "Подробнее →", product, class: "text-link" %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Товаров пока нет</h2>
+    <p>Добавьте первый товар и выберите для него категорию и бренд.</p>
+  </div>
+<% end %>

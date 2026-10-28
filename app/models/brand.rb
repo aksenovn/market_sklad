@@ -1,4 +1,5 @@
 class Brand < ApplicationRecord
+  has_many :products, dependent: :restrict_with_error
   normalizes :name, with: ->(name) { name.strip }
 
   validates :name,

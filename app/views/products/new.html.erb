@@ -1,0 +1,12 @@
+<% content_for :title, "Новый товар — МаркетСклад" %>
+
+<%= link_to "← Все товары", products_path, class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Новый товар</h1>
+  <p class="page-description">
+    Заполните данные и выберите категорию и бренд.
+  </p>
+
+  <%= render "form", product: @product %>
+</section>

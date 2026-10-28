@@ -43,11 +43,24 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to category_url(@category)
   end
 
-  test "should destroy category" do
+    test "should destroy unused category" do
+    category = Category.create!(name: "Временная категория")
+
     assert_difference("Category.count", -1) do
-      delete category_url(@category)
+      delete category_url(category)
     end
 
     assert_redirected_to categories_url
+  end
+
+  test "should not destroy category with products" do
+    assert_no_difference("Category.count") do
+      delete category_url(@category)
+    end
+
+    assert_redirected_to category_url(@category)
+    assert_equal "Нельзя удалить категорию, пока с ней связаны товары.",
+                 flash[:alert]
+    assert Product.exists?(products(:one).id)
   end
 end

@@ -45,16 +45,28 @@ class BrandsController < ApplicationController
     end
   end
 
-  def destroy
-    @brand.destroy!
-
+   def destroy
     respond_to do |format|
-      format.html do
-        redirect_to brands_path,
-                    notice: "Бренд удалён.",
-                    status: :see_other
+      if @brand.destroy
+        format.html do
+          redirect_to brands_path,
+                      notice: "Бренд удалён.",
+                      status: :see_other
+        end
+        format.json { head :no_content }
+      else
+        message = "Нельзя удалить бренд, пока с ним связаны товары."
+
+        format.html do
+          redirect_to @brand,
+                      alert: message,
+                      status: :see_other
+        end
+        format.json do
+          render json: { errors: [ message ] },
+                 status: :unprocessable_content
+        end
       end
-      format.json { head :no_content }
     end
   end
 
