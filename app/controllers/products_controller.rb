@@ -2,7 +2,49 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
   def index
-    @products = Product.includes(:category, :brand).order(:name)
+    @categories = Category.order(:name)
+    @brands = Brand.order(:name)
+
+    @query = params[:q].to_s.strip
+    @category_id = params[:category_id].to_s
+    @brand_id = params[:brand_id].to_s
+    @status = params[:status].to_s
+    @sort = params[:sort].to_s
+
+    @products = Product.includes(:category, :brand)
+
+    if @query.present?
+        pattern = "%#{Product.sanitize_sql_like(@query.downcase)}%"
+
+      @products = @products.where(
+        "products.search_text LIKE ?",
+        pattern
+      )
+    end
+
+    if @category_id.present?
+      @products = @products.where(category_id: @category_id)
+    end
+
+    if @brand_id.present?
+      @products = @products.where(brand_id: @brand_id)
+    end
+
+    case @status
+    when "active"
+      @products = @products.where(active: true)
+    when "archived"
+      @products = @products.where(active: false)
+    end
+
+    @products = case @sort
+    when "price_asc"
+      @products.order(price: :asc, id: :asc)
+    when "price_desc"
+      @products.order(price: :desc, id: :asc)
+    else
+      @products.order(name: :asc, id: :asc)
+    end
   end
 
   def show

@@ -1,0 +1,47 @@
+<%= form_with url: products_path, method: :get, class: "catalog-filters" do |form| %>
+  <div class="form-field">
+    <%= form.label :q, "Название или артикул" %>
+    <%= form.search_field :q, value: @query,
+        placeholder: "Например, Samsung или SAM-001" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :category_id, "Категория" %>
+    <%= form.select :category_id,
+        options_from_collection_for_select(@categories, :id, :name, @category_id),
+        { include_blank: "Все категории" } %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :brand_id, "Бренд" %>
+    <%= form.select :brand_id,
+        options_from_collection_for_select(@brands, :id, :name, @brand_id),
+        { include_blank: "Все бренды" } %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :status, "Статус" %>
+    <%= form.select :status,
+        options_for_select([
+          ["Все товары", ""],
+          ["Активные", "active"],
+          ["В архиве", "archived"]
+        ], @status) %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :sort, "Сортировка" %>
+    <%= form.select :sort,
+        options_for_select([
+          ["По названию", ""],
+          ["Сначала дешевле", "price_asc"],
+          ["Сначала дороже", "price_desc"]
+        ], @sort) %>
+  </div>
+
+  <div class="page-actions">
+    <%= form.submit "Найти", class: "button button-primary" %>
+    <%= link_to "Сбросить фильтры", products_path,
+        class: "button button-secondary" %>
+  </div>
+<% end %>

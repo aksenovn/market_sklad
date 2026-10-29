@@ -4,6 +4,7 @@ class Product < ApplicationRecord
 
   normalizes :name, with: ->(name) { name.strip }
   normalizes :sku, with: ->(sku) { sku.strip.upcase }
+  before_save :update_search_text
 
   validates :name,
             presence: { message: "Укажите название товара" },
@@ -32,4 +33,8 @@ class Product < ApplicationRecord
               in: [ true, false ],
               message: "Укажите активность товара"
             }
+  private
+  def update_search_text
+    self.search_text = "#{name} #{sku}".downcase
+  end
 end

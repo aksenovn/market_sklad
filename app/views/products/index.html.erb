@@ -12,7 +12,7 @@
   <%= link_to "Добавить товар", new_product_path,
       class: "button button-primary" %>
 </div>
-
+<%= render "filters" %>
 <% if @products.any? %>
   <div class="feature-grid">
     <% @products.each do |product| %>
@@ -44,7 +44,12 @@
   </div>
 <% else %>
   <div class="content-panel">
-    <h2>Товаров пока нет</h2>
-    <p>Добавьте первый товар и выберите для него категорию и бренд.</p>
+    <h2>Товары не найдены</h2>
+    <p>
+      Измените условия поиска или сбросьте фильтры.
+      Если каталог ещё пуст, добавьте первый товар.
+    </p>
+    <%= link_to "Сбросить фильтры", products_path,
+        class: "button button-secondary" %>
   </div>
 <% end %>
