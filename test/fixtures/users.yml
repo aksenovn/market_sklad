@@ -1,0 +1,11 @@
+customer:
+  name: Тестовый покупатель
+  email_address: customer@example.com
+  password_digest: <%= BCrypt::Password.create("TestPassword123", cost: BCrypt::Engine::MIN_COST) %>
+  role: customer
+
+employee:
+  name: Тестовый сотрудник
+  email_address: employee@example.com
+  password_digest: <%= BCrypt::Password.create("TestPassword123", cost: BCrypt::Engine::MIN_COST) %>
+  role: employee

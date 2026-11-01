@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "registration", to: "registrations#new", as: :new_registration
+  post "registration", to: "registrations#create"
+  resource :session, only: [ :new, :create, :destroy ]
   resources :products
   resources :brands
   resources :categories

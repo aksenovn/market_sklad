@@ -1,0 +1,59 @@
+<% content_for :title, "Регистрация — МаркетСклад" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Регистрация</h1>
+  <p class="page-description">
+    Создайте аккаунт покупателя.
+  </p>
+
+  <%= form_with model: @user, url: registration_path,
+      class: "category-form" do |form| %>
+    <% if @user.errors.any? %>
+      <div class="flash flash-alert" role="alert">
+        <strong>Проверьте заполнение формы:</strong>
+        <ul>
+          <% @user.errors.each do |error| %>
+            <li><%= error.message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-field">
+      <%= form.label :name, "Имя" %>
+      <%= form.text_field :name,
+          required: true, maxlength: 100, autocomplete: "name" %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :email_address, "Электронная почта" %>
+      <%= form.email_field :email_address,
+          required: true, autocomplete: "email" %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :password, "Пароль" %>
+      <%= form.password_field :password,
+          required: true, minlength: 8,
+          autocomplete: "new-password",
+          aria: { describedby: "password-hint" } %>
+      <p id="password-hint" class="page-description">
+        Не менее 8 символов.
+      </p>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :password_confirmation, "Повторите пароль" %>
+      <%= form.password_field :password_confirmation,
+          required: true, minlength: 8,
+          autocomplete: "new-password" %>
+    </div>
+
+    <div class="page-actions">
+      <%= form.submit "Зарегистрироваться",
+          class: "button button-primary" %>
+      <%= link_to "На главную", root_path,
+          class: "button button-secondary" %>
+    </div>
+  <% end %>
+</section>

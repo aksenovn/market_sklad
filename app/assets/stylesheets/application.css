@@ -684,3 +684,26 @@ textarea:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+.header-inner {
+  flex-wrap: wrap;
+  padding-block: 18px;
+}
+
+.account-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-nav form {
+  margin: 0;
+}
+
+.account-name {
+  max-width: 180px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 600;
+}

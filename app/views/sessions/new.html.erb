@@ -1,0 +1,30 @@
+<% content_for :title, "Вход — МаркетСклад" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Вход в аккаунт</h1>
+  <p class="page-description">
+    Введите электронную почту и пароль.
+  </p>
+
+  <%= form_with scope: :session, url: session_path,
+      class: "category-form" do |form| %>
+    <div class="form-field">
+      <%= form.label :email_address, "Электронная почта" %>
+      <%= form.email_field :email_address,
+          value: params.dig(:session, :email_address),
+          required: true, autocomplete: "username" %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :password, "Пароль" %>
+      <%= form.password_field :password,
+          required: true, autocomplete: "current-password" %>
+    </div>
+
+    <div class="page-actions">
+      <%= form.submit "Войти", class: "button button-primary" %>
+      <%= link_to "Создать аккаунт", new_registration_path,
+          class: "button button-secondary" %>
+    </div>
+  <% end %>
+</section>
