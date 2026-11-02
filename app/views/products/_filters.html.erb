@@ -19,15 +19,17 @@
         { include_blank: "Все бренды" } %>
   </div>
 
-  <div class="form-field">
-    <%= form.label :status, "Статус" %>
-    <%= form.select :status,
-        options_for_select([
-          ["Все товары", ""],
-          ["Активные", "active"],
-          ["В архиве", "archived"]
-        ], @status) %>
-  </div>
+  <% if employee? %>
+    <div class="form-field">
+      <%= form.label :status, "Статус" %>
+      <%= form.select :status,
+          options_for_select([
+            ["Все товары", ""],
+            ["Активные", "active"],
+            ["В архиве", "archived"]
+          ], @status) %>
+    </div>
+  <% end %>
 
   <div class="form-field">
     <%= form.label :sort, "Сортировка" %>

@@ -2,6 +2,16 @@ require "test_helper"
 
 class BrandsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    Rails.cache.clear
+
+    post session_url, params: {
+      session: {
+        email_address: users(:employee).email_address,
+        password: "TestPassword123"
+      }
+    }
+
+    assert_redirected_to root_url
     @brand = brands(:one)
   end
 

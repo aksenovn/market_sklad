@@ -10,17 +10,19 @@
     <%= simple_format(@category.description.presence || "Описание пока не добавлено.") %>
   </div>
 
-  <div class="page-actions">
-    <%= link_to "Редактировать", edit_category_path(@category),
-        class: "button button-primary" %>
+    <% if employee? %>
+    <div class="page-actions">
+      <%= link_to "Редактировать", edit_category_path(@category),
+          class: "button button-primary" %>
 
-    <%= button_to "Удалить категорию", @category,
-        method: :delete,
-        class: "button button-danger",
-        form: {
-          data: {
-            turbo_confirm: "Удалить категорию «#{@category.name}»?"
-          }
-        } %>
-  </div>
+      <%= button_to "Удалить категорию", @category,
+          method: :delete,
+          class: "button button-danger",
+          form: {
+            data: {
+              turbo_confirm: "Удалить категорию «#{@category.name}»?"
+            }
+          } %>
+    </div>
+  <% end %>
 </article>

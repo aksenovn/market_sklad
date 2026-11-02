@@ -7,8 +7,10 @@
     <p class="page-description">Производители товаров нашего магазина.</p>
   </div>
 
-  <%= link_to "Добавить бренд", new_brand_path,
-      class: "button button-primary" %>
+  <% if employee? %>
+    <%= link_to "Добавить бренд", new_brand_path,
+        class: "button button-primary" %>
+  <% end %>
 </div>
 
 <% if @brands.any? %>

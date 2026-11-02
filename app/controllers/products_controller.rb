@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :require_employee, only: %i[ new create edit update destroy ]
   before_action :set_product, only: %i[ show edit update destroy ]
 
   def index
@@ -12,6 +13,7 @@ class ProductsController < ApplicationController
     @sort = params[:sort].to_s
 
     @products = Product.includes(:category, :brand)
+    @products = @products.where(active: true) unless employee?
 
     if @query.present?
         pattern = "%#{Product.sanitize_sql_like(@query.downcase)}%"
@@ -103,7 +105,8 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find(params.expect(:id))
+    products = employee? ? Product.all : Product.where(active: true)
+    @product = products.find(params.expect(:id))
   end
 
   def product_params

@@ -7,8 +7,10 @@
     <p class="page-description">Разделы для удобного поиска товаров.</p>
   </div>
 
-  <%= link_to "Добавить категорию", new_category_path,
-      class: "button button-primary" %>
+  <% if employee? %>
+    <%= link_to "Добавить категорию", new_category_path,
+        class: "button button-primary" %>
+  <% end %>
 </div>
 
 <% if @categories.any? %>

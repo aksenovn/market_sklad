@@ -32,8 +32,10 @@
     <%= simple_format(@product.description.presence || "Описание пока не добавлено.") %>
   </div>
 
-  <div class="page-actions">
-    <%= link_to "Редактировать", edit_product_path(@product),
-        class: "button button-primary" %>
-  </div>
+  <% if employee? %>
+    <div class="page-actions">
+      <%= link_to "Редактировать", edit_product_path(@product),
+          class: "button button-primary" %>
+    </div>
+  <% end %>
 </article>

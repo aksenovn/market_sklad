@@ -5,12 +5,14 @@
     <span class="eyebrow">КАТАЛОГ</span>
     <h1 class="page-title">Товары</h1>
     <p class="page-description">
-      Управление товарами, ценами, категориями и брендами.
+      <%= employee? ? "Управление товарами, ценами, категориями и брендами." : "Выбирайте товары по названию, категории и бренду." %>
     </p>
   </div>
 
-  <%= link_to "Добавить товар", new_product_path,
-      class: "button button-primary" %>
+    <% if employee? %>
+    <%= link_to "Добавить товар", new_product_path,
+        class: "button button-primary" %>
+  <% end %>
 </div>
 <%= render "filters" %>
 <% if @products.any? %>

@@ -11,6 +11,6 @@ class NavigationTest < ApplicationSystemTestCase
     end
 
     assert_selector "h1", text: "Бренды товаров"
-    assert_link "Добавить бренд"
+    assert_no_link "Добавить бренд"
   end
 end
