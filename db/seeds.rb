@@ -80,3 +80,17 @@ demo_products.each do |attributes|
 
   product.save!
 end
+
+demo_warehouses = {
+  "Основной склад" => "Москва, Складская улица, 1",
+  "Резервный склад" => "Москва, Складская улица, 2"
+}
+
+demo_warehouses.each do |name, address|
+  warehouse = Warehouse.find_or_initialize_by(name: name)
+
+  next unless warehouse.new_record?
+
+  warehouse.address = address
+  warehouse.save!
+end

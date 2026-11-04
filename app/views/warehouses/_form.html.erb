@@ -1,0 +1,32 @@
+<%= form_with(model: warehouse, class: "category-form") do |form| %>
+  <% if warehouse.errors.any? %>
+    <div class="flash flash-alert" role="alert">
+      <strong>Проверьте заполнение формы:</strong>
+      <ul>
+        <% warehouse.errors.each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :name, "Название склада (обязательно)" %>
+    <%= form.text_field :name,
+        required: true, maxlength: 100,
+        placeholder: "Например, Основной склад" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :address, "Адрес (обязательно)" %>
+    <%= form.text_field :address,
+        required: true, maxlength: 255,
+        placeholder: "Город, улица, дом" %>
+  </div>
+
+  <div class="page-actions">
+    <%= form.submit "Сохранить склад", class: "button button-primary" %>
+    <%= link_to "Отмена", warehouses_path,
+        class: "button button-secondary" %>
+  </div>
+<% end %>

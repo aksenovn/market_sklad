@@ -42,6 +42,11 @@
           <%= link_to "Бренды", brands_path,
     class: "nav-link",
     aria: { current: controller_name == "brands" ? "page" : nil } %>
+    <% if employee? %>
+  <%= link_to "Склады", warehouses_path,
+      class: "nav-link",
+      aria: { current: controller_name == "warehouses" ? "page" : nil } %>
+<% end %>
           <%= link_to "Возможности", root_path(anchor: "features"), class: "nav-link" %>
           <%= link_to "О проекте", root_path(anchor: "about"), class: "nav-link" %>
         </nav>

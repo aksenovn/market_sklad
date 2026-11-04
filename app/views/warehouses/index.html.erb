@@ -1,0 +1,33 @@
+<% content_for :title, "Склады — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">УПРАВЛЕНИЕ СКЛАДОМ</span>
+    <h1 class="page-title">Склады</h1>
+    <p class="page-description">Места хранения товаров и их адреса.</p>
+  </div>
+
+  <%= link_to "Добавить склад", new_warehouse_path,
+      class: "button button-primary" %>
+</div>
+
+<% if @warehouses.any? %>
+  <div class="feature-grid">
+    <% @warehouses.each do |warehouse| %>
+      <article class="feature-card">
+        <h2 class="category-title">
+          <%= link_to warehouse.name, warehouse %>
+        </h2>
+
+        <p><%= warehouse.address %></p>
+
+        <%= link_to "Подробнее →", warehouse, class: "text-link" %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Складов пока нет</h2>
+    <p>Добавьте первый склад, указав название и адрес.</p>
+  </div>
+<% end %>

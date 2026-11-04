@@ -1,0 +1,25 @@
+<% content_for :title, "#{@warehouse.name} — МаркетСклад" %>
+
+<%= link_to "← Все склады", warehouses_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow">СКЛАД</span>
+  <h1 class="page-title"><%= @warehouse.name %></h1>
+
+  <h2>Адрес</h2>
+  <p class="category-description"><%= @warehouse.address %></p>
+
+  <div class="page-actions">
+    <%= link_to "Редактировать", edit_warehouse_path(@warehouse),
+        class: "button button-primary" %>
+
+    <%= button_to "Удалить склад", @warehouse,
+        method: :delete,
+        class: "button button-danger",
+        form: {
+          data: {
+            turbo_confirm: "Удалить склад «#{@warehouse.name}»?"
+          }
+        } %>
+  </div>
+</article>

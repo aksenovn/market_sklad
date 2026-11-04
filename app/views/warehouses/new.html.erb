@@ -1,0 +1,10 @@
+<% content_for :title, "Новый склад — МаркетСклад" %>
+
+<%= link_to "← Все склады", warehouses_path, class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Новый склад</h1>
+  <p class="page-description">Укажите название и адрес места хранения товаров.</p>
+
+  <%= render "form", warehouse: @warehouse %>
+</section>
