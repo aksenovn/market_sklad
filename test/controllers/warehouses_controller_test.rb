@@ -54,11 +54,26 @@ class WarehousesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to warehouse_url(@warehouse)
   end
 
-  test "should destroy warehouse" do
+    test "should destroy unused warehouse" do
+    warehouse = Warehouse.create!(
+      name: "Временный склад",
+      address: "Москва, Примерная улица, 10"
+    )
+
     assert_difference("Warehouse.count", -1) do
-      delete warehouse_url(@warehouse)
+      delete warehouse_url(warehouse)
     end
 
     assert_redirected_to warehouses_url
+  end
+
+  test "should not destroy warehouse with stocks" do
+    assert_no_difference([ "Warehouse.count", "Stock.count" ]) do
+      delete warehouse_url(@warehouse)
+    end
+
+    assert_redirected_to warehouse_url(@warehouse)
+    assert_equal "Нельзя удалить склад, пока с ним связаны остатки товаров.",
+                 flash[:alert]
   end
 end

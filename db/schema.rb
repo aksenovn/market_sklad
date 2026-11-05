@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_03_145615) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_05_114601) do
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -43,6 +43,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_03_145615) do
     t.check_constraint "price > 0", name: "products_price_positive"
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.integer "warehouse_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity", default: 0, null: false
+    t.integer "reserved_quantity", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_stocks_on_product_id"
+    t.index ["warehouse_id", "product_id"], name: "index_stocks_on_warehouse_id_and_product_id", unique: true
+    t.index ["warehouse_id"], name: "index_stocks_on_warehouse_id"
+    t.check_constraint "quantity >= 0", name: "stocks_quantity_nonnegative"
+    t.check_constraint "reserved_quantity <= quantity", name: "stocks_reserved_within_quantity"
+    t.check_constraint "reserved_quantity >= 0", name: "stocks_reserved_quantity_nonnegative"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email_address", null: false
@@ -64,4 +79,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_03_145615) do
 
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
+  add_foreign_key "stocks", "products"
+  add_foreign_key "stocks", "warehouses"
 end

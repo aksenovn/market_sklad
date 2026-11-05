@@ -1,0 +1,11 @@
+one:
+  warehouse: one
+  product: one
+  quantity: 10
+  reserved_quantity: 2
+
+two:
+  warehouse: two
+  product: two
+  quantity: 5
+  reserved_quantity: 0

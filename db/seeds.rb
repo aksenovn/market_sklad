@@ -94,3 +94,27 @@ demo_warehouses.each do |name, address|
   warehouse.address = address
   warehouse.save!
 end
+
+main_warehouse = Warehouse.find_by!(name: "Основной склад")
+
+demo_stock_quantities = {
+  "SAM-DEMO-001" => 10,
+  "BOS-DEMO-001" => 5,
+  "LEN-DEMO-001" => 7,
+  "LEGO-DEMO-001" => 15
+}
+
+demo_stock_quantities.each do |sku, quantity|
+  product = Product.find_by!(sku: sku)
+
+  stock = Stock.find_or_initialize_by(
+    warehouse: main_warehouse,
+    product: product
+  )
+
+  next unless stock.new_record?
+
+  stock.quantity = quantity
+  stock.reserved_quantity = 0
+  stock.save!
+end

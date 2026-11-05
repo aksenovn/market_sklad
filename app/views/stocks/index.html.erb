@@ -1,0 +1,48 @@
+<% content_for :title, "Остатки — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">УПРАВЛЕНИЕ СКЛАДОМ</span>
+    <h1 class="page-title">Остатки товаров</h1>
+    <p class="page-description">
+      Физическое количество, резерв и доступные товары на складах.
+    </p>
+  </div>
+
+  <%= link_to "Добавить остаток", new_stock_path,
+      class: "button button-primary" %>
+</div>
+
+<% if @stocks.any? %>
+  <div class="feature-grid">
+    <% @stocks.each do |stock| %>
+      <article class="feature-card">
+        <span class="card-label"><%= stock.warehouse.name %></span>
+
+        <h2 class="category-title">
+          <%= link_to stock.product.name, stock %>
+        </h2>
+
+        <p>Артикул: <%= stock.product.sku %></p>
+
+        <dl class="product-details">
+          <dt>На складе</dt>
+          <dd><%= stock.quantity %> шт.</dd>
+
+          <dt>В резерве</dt>
+          <dd><%= stock.reserved_quantity %> шт.</dd>
+
+          <dt>Доступно</dt>
+          <dd><strong><%= stock.available_quantity %> шт.</strong></dd>
+        </dl>
+
+        <%= link_to "Подробнее →", stock, class: "text-link" %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Остатков пока нет</h2>
+    <p>Выберите товар и склад, чтобы добавить первую запись.</p>
+  </div>
+<% end %>

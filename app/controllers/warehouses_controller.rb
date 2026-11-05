@@ -46,16 +46,28 @@ class WarehousesController < ApplicationController
     end
   end
 
-  def destroy
-    @warehouse.destroy!
-
+   def destroy
     respond_to do |format|
-      format.html do
-        redirect_to warehouses_path,
-                    notice: "Склад удалён.",
-                    status: :see_other
+      if @warehouse.destroy
+        format.html do
+          redirect_to warehouses_path,
+                      notice: "Склад удалён.",
+                      status: :see_other
+        end
+        format.json { head :no_content }
+      else
+        message = "Нельзя удалить склад, пока с ним связаны остатки товаров."
+
+        format.html do
+          redirect_to @warehouse,
+                      alert: message,
+                      status: :see_other
+        end
+        format.json do
+          render json: { errors: [ message ] },
+                 status: :unprocessable_content
+        end
       end
-      format.json { head :no_content }
     end
   end
 

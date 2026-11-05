@@ -1,0 +1,55 @@
+<%= form_with(model: stock, class: "category-form") do |form| %>
+  <% if stock.errors.any? %>
+    <div class="flash flash-alert" role="alert">
+      <strong>Проверьте заполнение формы:</strong>
+      <ul>
+        <% stock.errors.each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :warehouse_id, "Склад (обязательно)" %>
+    <%= form.collection_select :warehouse_id,
+        Warehouse.order(:name), :id, :name,
+        { prompt: "Выберите склад" },
+        { required: true } %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :product_id, "Товар (обязательно)" %>
+    <%= form.select :product_id,
+        options_for_select(
+          Product.order(:name).map { |product|
+            ["#{product.name} — #{product.sku}", product.id]
+          },
+          stock.product_id
+        ),
+        { include_blank: "Выберите товар" },
+        { required: true } %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :quantity, "Физическое количество, шт." %>
+    <%= form.number_field :quantity,
+        required: true, min: 0, step: 1 %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :reserved_quantity, "Резерв, шт." %>
+    <%= form.number_field :reserved_quantity,
+        required: true, min: 0, step: 1 %>
+  </div>
+
+  <p class="page-description">
+    Доступное количество рассчитывается как физическое количество минус резерв.
+  </p>
+
+  <div class="page-actions">
+    <%= form.submit "Сохранить остаток", class: "button button-primary" %>
+    <%= link_to "Отмена", stocks_path,
+        class: "button button-secondary" %>
+  </div>
+<% end %>

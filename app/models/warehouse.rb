@@ -1,4 +1,5 @@
 class Warehouse < ApplicationRecord
+  has_many :stocks, dependent: :restrict_with_error
   normalizes :name, with: ->(name) { name.strip }
   normalizes :address, with: ->(address) { address.strip }
 

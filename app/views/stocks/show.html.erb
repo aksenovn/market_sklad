@@ -1,0 +1,33 @@
+<% content_for :title, "Остаток: #{@stock.product.name} — МаркетСклад" %>
+
+<%= link_to "← Все остатки", stocks_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow">ОСТАТОК ТОВАРА</span>
+  <h1 class="page-title"><%= @stock.product.name %></h1>
+
+  <dl class="product-details">
+    <dt>Склад</dt>
+    <dd><%= link_to @stock.warehouse.name, @stock.warehouse %></dd>
+
+    <dt>Товар</dt>
+    <dd><%= link_to @stock.product.name, @stock.product %></dd>
+
+    <dt>Артикул</dt>
+    <dd><%= @stock.product.sku %></dd>
+
+    <dt>На складе</dt>
+    <dd><%= @stock.quantity %> шт.</dd>
+
+    <dt>В резерве</dt>
+    <dd><%= @stock.reserved_quantity %> шт.</dd>
+
+    <dt>Доступно</dt>
+    <dd><strong><%= @stock.available_quantity %> шт.</strong></dd>
+  </dl>
+
+  <div class="page-actions">
+    <%= link_to "Редактировать", edit_stock_path(@stock),
+        class: "button button-primary" %>
+  </div>
+</article>

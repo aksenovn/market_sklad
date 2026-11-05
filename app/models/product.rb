@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_many :stocks, dependent: :restrict_with_error
   belongs_to :category
   belongs_to :brand
 
