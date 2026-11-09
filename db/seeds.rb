@@ -118,3 +118,14 @@ demo_stock_quantities.each do |sku, quantity|
   stock.reserved_quantity = 0
   stock.save!
 end
+
+demo_suppliers = {
+  "Демо: Электроника" => "electronics@example.com",
+  "Демо: Товары для дома" => "home@example.com"
+}
+
+demo_suppliers.each do |name, email|
+  Supplier.find_or_create_by!(name: name) do |supplier|
+    supplier.email = email
+  end
+end

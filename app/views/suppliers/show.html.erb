@@ -1,0 +1,26 @@
+<% content_for :title, "#{@supplier.name} — МаркетСклад" %>
+
+<%= link_to "← Все поставщики", suppliers_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow">ПОСТАВЩИК</span>
+  <h1 class="page-title"><%= @supplier.name %></h1>
+
+  <dl class="product-details">
+    <dt>Почта</dt>
+    <dd><%= @supplier.email.presence || "Не указана" %></dd>
+
+    <dt>Телефон</dt>
+    <dd><%= @supplier.phone.presence || "Не указан" %></dd>
+  </dl>
+
+  <div class="page-actions">
+    <%= link_to "Редактировать", edit_supplier_path(@supplier),
+        class: "button button-primary" %>
+
+    <%= button_to "Удалить поставщика", @supplier,
+        method: :delete,
+        class: "button button-danger",
+        form: { data: { turbo_confirm: "Удалить поставщика «#{@supplier.name}»?" } } %>
+  </div>
+</article>

@@ -1,0 +1,32 @@
+<% content_for :title, "Поставщики — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">УПРАВЛЕНИЕ СКЛАДОМ</span>
+    <h1 class="page-title">Поставщики</h1>
+    <p class="page-description">Контакты компаний, у которых закупаем товары.</p>
+  </div>
+
+  <%= link_to "Добавить поставщика", new_supplier_path,
+      class: "button button-primary" %>
+</div>
+
+<% if @suppliers.any? %>
+  <div class="feature-grid">
+    <% @suppliers.each do |supplier| %>
+      <article class="feature-card">
+        <h2 class="category-title"><%= link_to supplier.name, supplier %></h2>
+        <p>
+          Почта: <%= supplier.email.presence || "Не указана" %><br>
+          Телефон: <%= supplier.phone.presence || "Не указан" %>
+        </p>
+        <%= link_to "Подробнее →", supplier, class: "text-link" %>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Поставщиков пока нет</h2>
+    <p>Добавьте поставщика, чтобы позже выбрать его при создании поставки.</p>
+  </div>
+<% end %>

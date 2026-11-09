@@ -1,0 +1,9 @@
+one:
+  name: Поставщик электроники
+  email: electronics@example.com
+  phone: "+7 000 000-00-01"
+
+two:
+  name: Поставщик товаров для дома
+  email: home@example.com
+  phone: "+7 000 000-00-02"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_05_114601) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_184551) do
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -56,6 +56,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_114601) do
     t.check_constraint "quantity >= 0", name: "stocks_quantity_nonnegative"
     t.check_constraint "reserved_quantity <= quantity", name: "stocks_reserved_within_quantity"
     t.check_constraint "reserved_quantity >= 0", name: "stocks_reserved_quantity_nonnegative"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_suppliers_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|

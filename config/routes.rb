@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :suppliers
   resources :stocks
   resources :warehouses
   get "registration", to: "registrations#new", as: :new_registration

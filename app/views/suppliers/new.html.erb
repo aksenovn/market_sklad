@@ -1,0 +1,10 @@
+<% content_for :title, "Новый поставщик — МаркетСклад" %>
+
+<%= link_to "← Все поставщики", suppliers_path, class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Новый поставщик</h1>
+  <p class="page-description">Укажите название и, если есть, контакты.</p>
+
+  <%= render "form", supplier: @supplier %>
+</section>

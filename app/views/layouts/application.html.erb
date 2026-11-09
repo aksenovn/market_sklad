@@ -50,7 +50,11 @@
   <%= link_to "Остатки", stocks_path,
       class: "nav-link",
       aria: { current: controller_name == "stocks" ? "page" : nil } %>
+    <%= link_to "Поставщики", suppliers_path,
+      class: "nav-link",
+      aria: { current: controller_name == "suppliers" ? "page" : nil } %>
 <% end %>
+
           <%= link_to "Возможности", root_path(anchor: "features"), class: "nav-link" %>
           <%= link_to "О проекте", root_path(anchor: "about"), class: "nav-link" %>
         </nav>

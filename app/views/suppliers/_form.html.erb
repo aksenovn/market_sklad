@@ -1,0 +1,33 @@
+<%= form_with(model: supplier, class: "category-form") do |form| %>
+  <% if supplier.errors.any? %>
+    <div class="flash flash-alert" role="alert">
+      <strong>Проверьте заполнение формы:</strong>
+      <ul>
+        <% supplier.errors.each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :name, "Название поставщика (обязательно)" %>
+    <%= form.text_field :name, required: true, maxlength: 100,
+        placeholder: "Например, Поставщик электроники" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :email, "Электронная почта" %>
+    <%= form.email_field :email, maxlength: 254, placeholder: "mail@example.com" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :phone, "Телефон" %>
+    <%= form.telephone_field :phone, maxlength: 40, placeholder: "+7 000 000-00-00" %>
+  </div>
+
+  <div class="page-actions">
+    <%= form.submit "Сохранить поставщика", class: "button button-primary" %>
+    <%= link_to "Отмена", suppliers_path, class: "button button-secondary" %>
+  </div>
+<% end %>
