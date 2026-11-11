@@ -52,11 +52,23 @@ class SuppliersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to supplier_url(@supplier)
   end
 
-  test "should destroy supplier" do
+    test "should destroy unused supplier" do
+    supplier = Supplier.create!(name: "Временный поставщик")
+
     assert_difference("Supplier.count", -1) do
-      delete supplier_url(@supplier)
+      delete supplier_url(supplier)
     end
 
     assert_redirected_to suppliers_url
+  end
+
+  test "should not destroy supplier with supplies" do
+    assert_no_difference([ "Supplier.count", "Supply.count" ]) do
+      delete supplier_url(@supplier)
+    end
+
+    assert_redirected_to supplier_url(@supplier)
+    assert_equal "Нельзя удалить поставщика, пока с ним связаны поставки.",
+                 flash[:alert]
   end
 end

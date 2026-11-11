@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supplier: one
+  warehouse: one
+  status: draft
+  notes: MyText
+
+two:
+  supplier: two
+  warehouse: two
+  status: draft
+  notes: MyText

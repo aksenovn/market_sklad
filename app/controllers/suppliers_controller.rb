@@ -50,11 +50,18 @@ class SuppliersController < ApplicationController
 
   # DELETE /suppliers/1 or /suppliers/1.json
   def destroy
-    @supplier.destroy!
+    if @supplier.destroy
+      respond_to do |format|
+        format.html { redirect_to suppliers_path, notice: "Поставщик удалён.", status: :see_other }
+        format.json { head :no_content }
+      end
+    else
+      message = "Нельзя удалить поставщика, пока с ним связаны поставки."
 
-    respond_to do |format|
-      format.html { redirect_to suppliers_path, notice: "Поставщик удалён.", status: :see_other }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to @supplier, alert: message, status: :see_other }
+        format.json { render json: { errors: [ message ] }, status: :unprocessable_content }
+      end
     end
   end
 

@@ -53,6 +53,9 @@
     <%= link_to "Поставщики", suppliers_path,
       class: "nav-link",
       aria: { current: controller_name == "suppliers" ? "page" : nil } %>
+        <%= link_to "Поставки", supplies_path,
+      class: "nav-link",
+      aria: { current: %w[ supplies supply_items ].include?(controller_name) ? "page" : nil } %>
 <% end %>
 
           <%= link_to "Возможности", root_path(anchor: "features"), class: "nav-link" %>

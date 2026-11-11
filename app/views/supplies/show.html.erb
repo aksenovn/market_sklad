@@ -1,0 +1,41 @@
+<% content_for :title, "Поставка №#{@supply.id} — МаркетСклад" %>
+
+<%= link_to "← Все поставки", supplies_path, class: "back-link" %>
+
+<article class="content-panel">
+  <span class="eyebrow"><%= @supply.draft? ? "Черновик" : "Принята" %></span>
+  <h1 class="page-title">Поставка №<%= @supply.id %></h1>
+
+  <dl class="product-details">
+    <dt>Поставщик</dt>
+    <dd><%= link_to @supply.supplier.name, @supply.supplier %></dd>
+
+    <dt>Склад</dt>
+    <dd><%= link_to @supply.warehouse.name, @supply.warehouse %></dd>
+  </dl>
+
+  <% if @supply.notes.present? %>
+    <h2>Примечание</h2>
+    <%= simple_format(@supply.notes) %>
+  <% end %>
+
+  <h2>Позиции поставки</h2>
+
+  <% if @supply.supply_items.any?(&:persisted?) %>
+    <ul>
+      <% @supply.supply_items.select(&:persisted?).each do |item| %>
+        <li>
+          <%= item.product.name %> (<%= item.product.sku %>) —
+          <%= item.quantity %> шт. по
+          <%= number_to_currency item.purchase_price, unit: "₽",
+              format: "%n %u", separator: ",", delimiter: " " %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Товары пока не добавлены.</p>
+  <% end %>
+</article>
+<% if @supply.draft? %>
+  <%= render "supplies/item_form" %>
+<% end %>

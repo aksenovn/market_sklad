@@ -1,4 +1,5 @@
 class Supplier < ApplicationRecord
+  has_many :supplies, dependent: :restrict_with_error
   normalizes :name, with: ->(name) { name.strip }
   normalizes :email, with: ->(email) { email.strip.downcase.presence }
   normalizes :phone, with: ->(phone) { phone.strip.presence }

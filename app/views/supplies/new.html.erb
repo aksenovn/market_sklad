@@ -1,0 +1,38 @@
+<% content_for :title, "Новая поставка — МаркетСклад" %>
+
+<%= link_to "← Все поставки", supplies_path, class: "back-link" %>
+
+<section class="content-panel form-panel">
+  <h1 class="page-title">Новая поставка</h1>
+  <p class="page-description">Выберите поставщика и склад. Товары добавляются после сохранения черновика.</p>
+
+  <%= form_with model: @supply, class: "category-form" do |form| %>
+    <% if @supply.errors.any? %>
+      <div class="flash flash-alert" role="alert">
+        <p>Не удалось создать поставку. Проверьте выбор поставщика и склада.</p>
+      </div>
+    <% end %>
+
+    <div class="form-field">
+      <%= form.label :supplier_id, "Поставщик" %>
+      <%= form.collection_select :supplier_id, @suppliers, :id, :name,
+          { prompt: "Выберите поставщика" }, { required: true } %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :warehouse_id, "Склад" %>
+      <%= form.collection_select :warehouse_id, @warehouses, :id, :name,
+          { prompt: "Выберите склад" }, { required: true } %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :notes, "Примечание" %>
+      <%= form.text_area :notes, rows: 4 %>
+    </div>
+
+    <div class="page-actions">
+      <%= form.submit "Сохранить черновик", class: "button button-primary" %>
+      <%= link_to "Отмена", supplies_path, class: "button button-secondary" %>
+    </div>
+  <% end %>
+</section>

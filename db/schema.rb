@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_184551) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_11_155626) do
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -67,6 +67,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_184551) do
     t.index ["name"], name: "index_suppliers_on_name", unique: true
   end
 
+  create_table "supplies", force: :cascade do |t|
+    t.integer "supplier_id", null: false
+    t.integer "warehouse_id", null: false
+    t.string "status", default: "draft", null: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_supplies_on_supplier_id"
+    t.index ["warehouse_id"], name: "index_supplies_on_warehouse_id"
+    t.check_constraint "status IN ('draft', 'received')", name: "supplies_status_allowed"
+  end
+
+  create_table "supply_items", force: :cascade do |t|
+    t.integer "supply_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity", null: false
+    t.decimal "purchase_price", precision: 12, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_supply_items_on_product_id"
+    t.index ["supply_id", "product_id"], name: "index_supply_items_on_supply_id_and_product_id", unique: true
+    t.index ["supply_id"], name: "index_supply_items_on_supply_id"
+    t.check_constraint "purchase_price >= 0", name: "supply_items_price_nonnegative"
+    t.check_constraint "quantity > 0", name: "supply_items_quantity_positive"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email_address", null: false
@@ -90,4 +116,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_184551) do
   add_foreign_key "products", "categories"
   add_foreign_key "stocks", "products"
   add_foreign_key "stocks", "warehouses"
+  add_foreign_key "supplies", "suppliers"
+  add_foreign_key "supplies", "warehouses"
+  add_foreign_key "supply_items", "products"
+  add_foreign_key "supply_items", "supplies"
 end

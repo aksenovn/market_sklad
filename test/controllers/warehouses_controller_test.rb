@@ -68,12 +68,29 @@ class WarehousesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not destroy warehouse with stocks" do
+    supplies(:one).update!(warehouse: warehouses(:two))
     assert_no_difference([ "Warehouse.count", "Stock.count" ]) do
       delete warehouse_url(@warehouse)
     end
 
     assert_redirected_to warehouse_url(@warehouse)
     assert_equal "Нельзя удалить склад, пока с ним связаны остатки товаров.",
+                 flash[:alert]
+  end
+
+  test "should not destroy warehouse with supplies but without stocks" do
+    warehouse = Warehouse.create!(
+      name: "Склад для поставки",
+      address: "Москва, Примерная улица, 11"
+    )
+    supplies(:one).update!(warehouse: warehouse)
+
+    assert_no_difference([ "Warehouse.count", "Supply.count" ]) do
+      delete warehouse_url(warehouse)
+    end
+
+    assert_redirected_to warehouse_url(warehouse)
+    assert_equal "Нельзя удалить склад, пока с ним связаны поставки.",
                  flash[:alert]
   end
 end

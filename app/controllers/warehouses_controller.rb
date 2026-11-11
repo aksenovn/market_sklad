@@ -56,7 +56,11 @@ class WarehousesController < ApplicationController
         end
         format.json { head :no_content }
       else
-        message = "Нельзя удалить склад, пока с ним связаны остатки товаров."
+        message = if @warehouse.supplies.exists?
+          "Нельзя удалить склад, пока с ним связаны поставки."
+        else
+          "Нельзя удалить склад, пока с ним связаны остатки товаров."
+        end
 
         format.html do
           redirect_to @warehouse,

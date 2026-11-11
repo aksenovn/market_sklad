@@ -1,0 +1,29 @@
+<% content_for :title, "Поставки — МаркетСклад" %>
+
+<div class="page-heading">
+  <div>
+    <span class="eyebrow">УПРАВЛЕНИЕ СКЛАДОМ</span>
+    <h1 class="page-title">Поставки</h1>
+    <p class="page-description">Поставщики, склады и состав поставок.</p>
+  </div>
+
+  <%= link_to "Создать поставку", new_supply_path, class: "button button-primary" %>
+</div>
+
+<% if @supplies.any? %>
+  <div class="feature-grid">
+    <% @supplies.each do |supply| %>
+      <article class="feature-card">
+        <span class="card-label"><%= supply.draft? ? "Черновик" : "Принята" %></span>
+        <h2 class="category-title"><%= link_to "Поставка №#{supply.id}", supply %></h2>
+        <p>Поставщик: <%= supply.supplier.name %></p>
+        <p>Склад: <%= supply.warehouse.name %></p>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="content-panel">
+    <h2>Поставок пока нет</h2>
+    <p>Создайте черновик и добавьте в него товары.</p>
+  </div>
+<% end %>
