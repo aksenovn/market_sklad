@@ -27,6 +27,24 @@ class SuppliesController < ApplicationController
       render :new, status: :unprocessable_content
     end
   end
+  def receive
+    supply = Supply.find(params.expect(:id))
+
+    case supply.receive!
+    when :received
+      redirect_to supply, notice: "Поставка принята. Остатки обновлены.",
+                  status: :see_other
+    when :already_received
+      redirect_to supply, alert: "Эта поставка уже принята.",
+                  status: :see_other
+    when :empty
+      redirect_to supply, alert: "Добавьте хотя бы один товар перед приёмкой.",
+                  status: :see_other
+    end
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
+    redirect_to supply, alert: "Не удалось принять поставку. Остатки не изменились.",
+                status: :see_other
+  end
 
   private
 

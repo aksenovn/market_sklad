@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :suppliers
+
   resources :supplies, only: %i[ index show new create ] do
-  resources :supply_items, only: :create
+    post :receive, on: :member
+    resources :supply_items, only: :create
   end
   resources :stocks
   resources :warehouses

@@ -1,18 +1,21 @@
 class SupplyItemsController < ApplicationController
   before_action :require_employee
 
-  def create
+    def create
     @supply = Supply.find(params.expect(:supply_id))
 
-    unless @supply.draft?
-      redirect_to @supply, alert: "Можно менять только черновик поставки.",
-                  status: :see_other
-      return
+    result = @supply.with_lock do
+      next :not_draft unless @supply.draft?
+
+      @item = @supply.supply_items.build(item_params)
+      @item.save ? :created : :invalid
     end
 
-    @item = @supply.supply_items.build(item_params)
-
-    if @item.save
+    case result
+    when :not_draft
+      redirect_to @supply, alert: "Можно менять только черновик поставки.",
+                  status: :see_other
+    when :created
       redirect_to @supply, notice: "Товар добавлен в поставку.",
                   status: :see_other
     else

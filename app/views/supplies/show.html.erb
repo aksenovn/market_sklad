@@ -35,6 +35,14 @@
   <% else %>
     <p>Товары пока не добавлены.</p>
   <% end %>
+    <% if @supply.draft? && @supply.supply_items.any?(&:persisted?) %>
+    <div class="page-actions">
+      <%= button_to "Принять поставку", receive_supply_path(@supply),
+          method: :post,
+          class: "button button-primary",
+          form: { data: { turbo_confirm: "Принять поставку и зачислить товары на склад?" } } %>
+    </div>
+  <% end %>
 </article>
 <% if @supply.draft? %>
   <%= render "supplies/item_form" %>
